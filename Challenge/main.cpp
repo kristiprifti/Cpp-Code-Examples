@@ -36,6 +36,7 @@ int main() {
     string alphabet {"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"};
     string key  {"XZNLWEBGJHQDYVTKFUOMPCIASRxznlwebgjhqdyvtkfuompciasr"};
     
+    cout << "testing one two theree";
     
     cout << endl;
     return 0;
