@@ -7,3 +7,4 @@
 *.user
 *.vcxproj
 .vs/
+Debug/
