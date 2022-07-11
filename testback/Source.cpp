@@ -42,54 +42,40 @@ int main() {
     string key{ "XZNLWEBGJHQDYVTKFUOMPCIASRxznlwebgjhqdyvtkfuompciasr" };
 
     string message{};
-    //const char x = 'a';
-    //const char y = 'Z';
 
     cout << "Please eneter your String:";
     getline(cin, message);
 
+    string encytpyed{};
 
-
-
-    //replace(message.begin(), message.end(), );
-    //replace(message.begin(), message.end(), 'b', 'Z');
+    cout << "Encryting the message..." << endl;
 
     for (auto i : message) {
-        int index = message.find(i);
-        if (index != std::string::npos) {
-            std::cout << "Character found at index " << index << std::endl;
+        size_t position = alphabet.find(i);
+        if (position != string::npos) {
+            char new_char{ key.at(position) };
+            encytpyed += new_char;
         }
         else {
-            std::cout << "Character not found" << std::endl;
+            encytpyed += i;
         }
-
-
     }
 
+    cout << "Enctypted message: " << encytpyed << endl;
 
-
-    //for (int i{ 0 }; i < alphabet.size();i++) {
-    //    char x = alphabet.at(i);
-    //    int j{ i };
-    //    for (j; j < key.size(); j++) {
-    //        char p = key.at(j);
-    //        replace(message.begin(), message.end(), x, p);
-    //    }
-    //}
-    //replace(message.begin(), message.end(), i, j);
-
-
-    //size_t pos{};
-    //while ((pos = message.find('a')) != string::npos) {
-    //    message.replace(pos, 1,"Z");
-    //}
-
-    cout << message << endl;
-    //for (auto i : message) {
-    //    
-    //}
-
-    
+    // decrypt 
+    string decrypted{};
+    for (auto j : encytpyed) {
+        size_t pos = key.find(j);
+        if (pos != string::npos) {
+            char newchar{ alphabet.at(pos) };
+            decrypted += newchar;
+        }
+        else {
+            decrypted += j;
+        }
+    }
+    cout << "Decytted  message: " << decrypted << endl;
 
     cout << endl;
     return 0;
