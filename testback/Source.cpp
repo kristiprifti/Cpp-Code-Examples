@@ -1,83 +1,186 @@
 // Section 10
-// Challenge - 
-// Substitution Cipher
+// Letter Pyramid
 
 /*
-A simple and very old method of sending secret messages is the substitution cipher.
-You might have used this cipher with your friends when you were a kid.
-Basically, each letter of the alphabet gets replaced by another letter of the alphabet.
-For example, every 'a' get replaced with an 'X', and every 'b' gets replaced with a 'Z', etc.
+Write a C++ program that displays a Letter Pyramid from a user-provided std::string.
 
-Write a program thats ask a user to enter a secret message.
+Prompt the user to enter a std::string and then from that string display a Letter Pyramid as follows:
 
-Encrypt this message using the substitution cipher and display the encrypted message.
-Then decryped the encrypted message back to the original message.
+It's much easier to understand the Letter Pyramid given examples.
 
-You may use the 2 strings below for  your subsitition.
-For example, to encrypt you can replace the character at position n in alphabet
-with the character at position n in key.
+If the user enters the string "ABC", then your program should display:
 
-To decrypt you can replace the character at position n in key
-with the character at position n in alphabet.
+  A
+ ABA
+ABCBA
 
-Have fun! And make the cipher stronger if you wish!
-Currently the cipher only substitutes letters - you could easily add digits, puncuation, whitespace and so
-forth. Also, currently the cipher always substitues a lowercase letter with an uppercase letter and vice-versa.
-This could also be improved.
 
-Remember, the less code you write the less code you have to test!
-Reuse existing functionality in libraries and in the std::string class!
+If the user enters the string, "12345", then your program should display:
+
+
+
+    1
+   121
+  12321
+ 1234321
+123454321
+
+
+If the user enters 'ABCDEFG', then your program should display:
+
+
+
+      A
+     ABA
+    ABCBA
+   ABCDCBA
+  ABCDEDCBA
+ ABCDEFEDCBA
+ABCDEFGFEDCBA
+If the user enters 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', then your program should display:
+
+                         A
+                        ABA
+                       ABCBA
+                      ABCDCBA
+                     ABCDEDCBA
+                    ABCDEFEDCBA
+                   ABCDEFGFEDCBA
+                  ABCDEFGHGFEDCBA
+                 ABCDEFGHIHGFEDCBA
+                ABCDEFGHIJIHGFEDCBA
+               ABCDEFGHIJKJIHGFEDCBA
+              ABCDEFGHIJKLKJIHGFEDCBA
+             ABCDEFGHIJKLMLKJIHGFEDCBA
+            ABCDEFGHIJKLMNMLKJIHGFEDCBA
+           ABCDEFGHIJKLMNONMLKJIHGFEDCBA
+          ABCDEFGHIJKLMNOPONMLKJIHGFEDCBA
+         ABCDEFGHIJKLMNOPQPONMLKJIHGFEDCBA
+        ABCDEFGHIJKLMNOPQRQPONMLKJIHGFEDCBA
+       ABCDEFGHIJKLMNOPQRSRQPONMLKJIHGFEDCBA
+      ABCDEFGHIJKLMNOPQRSTSRQPONMLKJIHGFEDCBA
+     ABCDEFGHIJKLMNOPQRSTUTSRQPONMLKJIHGFEDCBA
+    ABCDEFGHIJKLMNOPQRSTUVUTSRQPONMLKJIHGFEDCBA
+   ABCDEFGHIJKLMNOPQRSTUVWVUTSRQPONMLKJIHGFEDCBA
+  ABCDEFGHIJKLMNOPQRSTUVWXWVUTSRQPONMLKJIHGFEDCBA
+ ABCDEFGHIJKLMNOPQRSTUVWXYXWVUTSRQPONMLKJIHGFEDCBA
+ABCDEFGHIJKLMNOPQRSTUVWXYZYXWVUTSRQPONMLKJIHGFEDCBA
+If the user enters "C++isFun!", then your program should display:
+
+
+
+        C
+       C+C
+      C+++C
+     C++i++C
+    C++isi++C
+   C++isFsi++C
+  C++isFuFsi++C
+ C++isFunuFsi++C
+C++isFun!nuFsi++C
+
+
+Think about the problem before you begin and break it down into steps.
+
+This can be a very challenging problem to solve!
+
+*****  Don't forget to paste your code solution when you submit.******
+
+*****  Also, submit it so your peers can see it and possibly comment. ******
+
+Have fun!
+
+Questions for this assignment
+Which C++ loop(s) did you use and why?
+
+How did you handle displaying the leading spaces in each row of the pyramid?
+
+Now that you completed the assignment, how might approach the problem differently if you had to solve it again?
 */
 
 #include <iostream>
 #include <string>
-#include <algorithm>
 
 
 using namespace std;
 
 int main() {
 
-    string alphabet{ "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" };
-    string key{ "XZNLWEBGJHQDYVTKFUOMPCIASRxznlwebgjhqdyvtkfuompciasr" };
+    string inputText{};
+    cout << "Enter input text: " << endl;
+    getline(cin, inputText);
 
-    string message{};
+    size_t i{ 0 };
+    //size_t spaces{ inputText.size() };
+    while (i < inputText.size()) {
+        size_t for_loopsize{ i };
 
-    cout << "Please eneter your String:";
-    getline(cin, message);
-
-    string encytpyed{};
-
-    cout << "Encryting the message..." << endl;
-
-    for (auto i : message) {
-        size_t position = alphabet.find(i);
-        if (position != string::npos) {
-            char new_char{ key.at(position) };
-            encytpyed += new_char;
+        size_t  spaces = inputText.size() - i;
+        for (spaces; (spaces >= 0 && spaces < 100); spaces--) {
+            cout << ' ';
         }
-        else {
-            encytpyed += i;
+
+        for (int j{ 0 }; j < for_loopsize; j++) {
+            cout << inputText.at(j);
+            cout << ' ';
         }
+        for (size_t c{i}; (c >= 0 && c < 100); c--) {
+            cout << inputText.at(c);
+            cout << ' ';
+        }
+        cout << endl;
+
+        i++;
     }
+    // Letter Pyramid
+// Written by Frank J. Mitropoulos
+//
+//#include <iostream>
+//#include <string>
+//
+//
+//    int main()
+//    {
+//        std::string letters{};
+//
+//        std::cout << "Enter a string of letters so I can create a Letter Pyramid from it: ";
+//        getline(std::cin, letters);
+//
+//        size_t num_letters = letters.length();
+//
+//        int position{ 0 };
+//
+//        // for each letter in the string
+//        for (char c : letters) {
+//
+//            size_t num_spaces = num_letters - position;
+//            while (num_spaces > 0) {
+//                std::cout << " ";
+//                --num_spaces;
+//            }
+//
+//            // Display in order up to the current character
+//            for (size_t j = 0; j < position; j++) {
+//                std::cout << letters.at(j);
+//            }
+//
+//            // Display the current 'center' character
+//            std::cout << c;
+//
+//            // Display the remaining characters in reverse order
+//            for (int j = position - 1; j >= 0; --j) {
+//                // You can use this line to get rid of the size_t vs int warning if you want
+//                auto k = static_cast<size_t>(j);
+//                std::cout << letters.at(k);
+//            }
+//
+//            std::cout << std::endl; // Don't forget the end line
+//            ++position;
+//        }
+//
+//        return 0;
+//    }
 
-    cout << "Enctypted message: " << encytpyed << endl;
-
-    // decrypt 
-    string decrypted{};
-    for (auto j : encytpyed) {
-        size_t pos = key.find(j);
-        if (pos != string::npos) {
-            char newchar{ alphabet.at(pos) };
-            decrypted += newchar;
-        }
-        else {
-            decrypted += j;
-        }
-    }
-    cout << "Decytted  message: " << decrypted << endl;
-
-    cout << endl;
     return 0;
 }
 
